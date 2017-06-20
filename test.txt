@@ -1,0 +1,1 @@
+git init 初始化git ，下载.git文件夹
