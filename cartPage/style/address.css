@@ -1,0 +1,252 @@
+.container {
+    width: 1000px;
+    margin: 40px auto;
+    background: #f3f3f3;
+}
+.address-head {
+    height: 30px;
+    line-height: 30px;
+    font-size: 0;
+    text-align: center;
+    position: relative;
+}
+.address-head:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    left: 0;
+    right: 0;
+    background: #333;
+    z-index: 1;
+}
+.address-head span {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 20px;
+    background: #f3f3f3;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+.address-cards {
+    text-align: left;
+}
+.address-cards li {
+    float: left;
+    width: 260px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    height: 120px;
+}
+.user-default,
+.user-set-default {
+    font-size: 12px;
+    color: #f00;
+}
+.user-set-default {
+    display: none;
+}
+.address-cards li:hover,
+.address-cards li.current {
+    border-color: #f58080;
+}
+.address-cards li:hover .user-set-default{
+    display: block;
+}
+.user-address {
+    margin-bottom: 10px;
+}
+.address-cards li .ico {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    right: 10px;
+    background-size: 16px;
+    display: none;
+}
+.ico-edit {
+    background: url(../img/pen.png) no-repeat;
+    top: 10px;
+}
+.ico-del {
+    background: url(../img/del.png) no-repeat;
+    bottom: 10px;
+}
+.address-cards li:hover .ico {
+    display: block;
+}
+.user-postNum {
+    margin-bottom: 15px;
+}
+
+.address-cards li:last-child {
+    text-align: center;
+}
+.address-cards li:last-child:before {
+    content: "";
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.add-wrap {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+.clearfix:after {
+    content: ".";
+    height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.address-ways {
+    text-align: center;
+}
+.item-ways {
+    width: 200px;
+    padding: 10px 0;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.item-ways p {
+    font-size: 16px;
+    color: #999;
+}
+.item-ways p + p {
+    font-size: 14px;
+}
+
+.item-ways:hover,
+.item-ways.active {
+    border-color: #f58080;
+}
+.item-ways:hover p,
+.item-ways.active p {
+    color: #f58080;
+}
+@keyframes myfirst {
+    0{top:0;}
+    100%{top:4px;}
+}
+.arrow {
+    background: url(../img/arrow.png) no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 10px;
+    background-size: 12px;
+    margin-left: 5px;
+    position: relative;
+    top: 0;
+    animation: myfirst .4s ease-in-out 0s infinite alternate;
+}
+.loadMore {
+    font-size: 16px;
+    color: #f58080;
+}
+.address-body {
+    text-align: center;
+}
+
+
+
+
+
+.pop.open {
+    display: block;
+}
+.pop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.4);
+    z-index: 9;
+    display: none;
+}
+.pop-main {
+    width: 410px;
+    height: 260px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -225px;
+    margin-top: -150px;
+    background: #fff;
+    padding: 20px;
+}
+.pop-main h3 {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pop-btns {
+    text-align: center;
+}
+.pop-btns .btn {
+    width: 140px;
+    height: 30px;
+    line-height: 30px;
+    color: #555;
+    border: 1px solid #555;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.pop-btns .btn:hover {
+    color: #fff;
+    background: #555;
+}
+.pop-input li {
+    margin-bottom: 15px;
+}
+.pop-input input {
+    width: 285px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #555;
+    text-indent: 1em;
+    font-size: 14px;
+}
+.pop-input input:focus {
+    outline: none;
+}
+.label {
+    font-size: 14px;
+    min-width: 58px;
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+}
+.ico-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background: url(../img/close.png) no-repeat;
+    cursor: pointer;
+    transition: transform .5s;
+}
+.ico-close:hover {
+    transform: rotate(180deg);
+}

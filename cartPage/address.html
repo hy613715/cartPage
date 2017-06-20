@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>地址选择</title>
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/address.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="address-head"><span>配送地址</span></h1>
+        <div class="address-body">
+            <ul class="address-cards clearfix">
+                <li v-for="(item,index) in addressLimit" :class="{'current':index==curIndex}" @click="curIndex = index">
+                    <p class="user-name">姓名：{{item.userName}}</p>
+                    <p class="user-address">地址：{{item.streetName}}</p>
+                    <p class="user-postNum">邮编：{{item.postCode}}</p>
+                    <p class="user-default" v-if="item.isDefault">默认地址</p>
+                    <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item.addressId)">设为默认地址</p>
+                    <i class="ico ico-edit"></i>
+                    <i class="ico ico-del" @click="moveAddr(item)"></i>
+                </li>
+                <li @click="showPop">
+                    <div class="add-wrap">
+                        <img src="img/plus.png">
+                        <p class="add-address">添加新地址</p>
+                    </div>
+                </li>
+            </ul>
+            <a href="javascript:;" class="loadMore" @click="showMore()" v-if="addressList.length>2">more<span class="arrow"></span></a>
+        </div>
+        <h1 class="address-head"><span>配送方式</span></h1>
+        <div class="address-ways">
+            <div class="item-ways" :class="{'active':sendWays==1}" @click="sendWays=1">
+                <p>标准配送</p>
+                <p>free</p>
+            </div>
+            <div class="item-ways" :class="{'active':sendWays==2}" @click="sendWays=2">
+                <p>高级配送</p>
+                <p>180</p>
+            </div>
+        </div>
+        <div class="pop" v-bind:class="{'open':layerShow}">
+            <div class="pop-main">
+                <i class="ico-close" @click="showPop"></i>
+                <h3>添加地址</h3>
+                <div class="pop-body">
+                    <ul class="pop-input">
+                        <li>
+                            <label for="" class="label">姓名：</label>
+                            <input type="text" placeholder="请输入姓名" v-model="addAddress.userName">
+                        </li>
+                        <li>
+                            <label for="" class="label">地址：</label>
+                            <input type="text" placeholder="请输入地址" v-model="addAddress.streetName">
+                        </li>
+                        <li>
+                            <label for="" class="label">邮编：</label>
+                            <input type="text" placeholder="请输入邮编" v-model="addAddress.postCode">
+                        </li>
+                    </ul>
+                </div>
+                <div class="pop-btns">
+                    <a href="javascript:;" class="btn" @click="getMsg()">确定</a>
+                    <a href="javascript:;" class="btn" @click="showPop">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="js/address.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/cart.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <h1 class="page-head"><span>购物车</span></h1>
+        <div class="cart-main">
+            <ul class="cart-titles">
+                <li>商品信息</li>
+                <li>商品金额</li>
+                <li>商品数量</li>
+                <li>总金额</li>
+                <li>编辑</li>
+            </ul>
+            <div class="goods-detail" v-for="item in goodsList">
+                <div class="goods-cell">
+                    <div class="cartCheckbox">
+                        <label class="reset-checkbox" v-bind:class="{'check':item.goodsCheck}" v-on:click="chooseGoods(item)"></label>
+                    </div>
+                    <div class="goods-img">
+                        <img v-bind:src="item.goodsImg" alt="">
+                    </div>
+                    <div class="goods-msg">
+                        <div class="goods-name">{{item.goodsName}}</div>
+                        <div class="goods-with">赠品：<span v-for="part in item.parts">{{part.partsName}}</span></div>
+                    </div>
+                </div>
+                <div class="goods-cell">
+                    <span class="goods-price">{{item.goodsPrice | formatMoney("元")}}</span>
+                </div>
+                <div class="goods-cell">
+                    <span class="count" @click="changeMoney(item,-1)">-</span>
+                    <input class="goodsNum" type="number" v-model="item.goodsNum">
+                    <span class="plus" @click="changeMoney(item,1)">+</span>
+                </div>
+                <div class="goods-cell">
+                    <span class="goods-price font-red">{{item.goodsPrice*item.goodsNum | formatMoney("元")}}</span>
+                </div>
+                <div class="goods-cell">
+                    <i class="ico-del" @click="delGoods(item)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="submitBox clearfix">
+            <div class="submit-ctrl">
+                <div class="cartCheckbox">
+                    <label class="reset-checkbox" :class="{'check': checkAllFlag}" @click="checkAll(true)"></label>
+                </div>
+                <span @click="checkAll(true)">全选</span>
+                <span @click="checkAll(false)">取消全选</span>
+            </div>
+            <div class="submitBtnBox">
+                <span>所有商品总价格：{{allMoney | formatMoney("元")}}</span>
+                <a href="" class="submit-btn">结 账</a>
+            </div>
+        </div>
+        <div class="layer " :class="{'show':layerShow}">
+            <div class="pop-box">
+                <div class="pop-main">
+                    <div class="pop-head">
+                        <h2>确定要删除所选商品吗？</h2>
+                        <i class="ico-close" @click="layerShow=false"></i>
+                    </div>
+                    <div class="pop-body">
+                        <a href="javascript:;" class="pop-btn" @click="delGood()">确定</a>
+                        <a href="javascript:;" class="pop-btn pop-btn-unchoose" @click="layerShow=false">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

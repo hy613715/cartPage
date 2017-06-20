@@ -1,0 +1,281 @@
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    background: #f3f3f3;
+    padding: 20px 0;
+}
+.page-head {
+    height: 30px;
+    line-height: 30px;
+    font-size: 0;
+    text-align: center;
+    position: relative;
+}
+.page-head:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    left: 0;
+    right: 0;
+    background: #333;
+    z-index: 1;
+}
+.page-head span {
+    font-size: 16px;
+    font-weight: bold;
+    padding:0 20px;
+    background: #f3f3f3;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+.cart-main {
+    width: 100%;
+    display: table;
+}
+/*商品属性*/
+.cart-titles {
+    background: #4e4e4e;
+    display: table-row;
+}
+.cart-titles li {
+    display: table-cell;
+    font-size: 14px;
+    color: #fff;
+    padding: 10px 20px;
+    text-indent: 4em;
+}
+.cart-titles li + li {
+    text-align: center;
+    text-indent: 0;
+}
+
+/*单个商品*/
+.goods-detail {
+    display: table-row;
+    background: #fefefe;
+}
+.goods-cell {
+    display: table-cell;
+    padding: 20px;
+    border-bottom: 1px dashed #8c8c8c;
+    font-size: 0;
+    vertical-align: middle;
+}
+.goods-cell + .goods-cell  {
+    text-align: center;
+}
+.cartCheckbox {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+.reset-checkbox {
+    display: block;
+    height: inherit;
+    background: url(../img/check.png) no-repeat;
+    cursor: pointer;
+}
+.reset-checkbox.check {
+    background: url(../img/checked.png) no-repeat;
+}
+.goods-img {
+    width: 100px;
+    height: 100px;
+    overflow:hidden;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+.goods-img img {
+    width: 100%;
+}
+.goods-msg {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #555;
+}
+.goods-name {
+    margin-bottom: 30px;
+}
+.goods-with span + span {
+    margin-left: 10px;
+}
+.goodsNum {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #000;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    line-height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.goodsNum:focus {
+    outline: none;
+}
+.count,
+.plus {
+    font-size: 18px;
+    color: #555;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.goods-price {
+    font-size: 14px;
+}
+.font-red {
+    color: #f00;
+}
+.ico-del {
+    background: url(../img/del.png) no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+.submitBox {
+    padding: 20px;
+    font-size: 14px;
+}
+.submit-ctrl {
+    float: left;
+}
+.submit-ctrl span {
+    cursor: pointer;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 24px;
+    line-height: 24px;
+}
+
+.submitBtnBox {
+    float: right;
+}
+.submitBtnBox span {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 20px;
+}
+.submit-btn {
+    width: 200px;
+    background: #564b51;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.clearfix:after {
+    content: ".";
+    height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+html,body{
+-moz-user-select: none;
+-khtml-user-select: none;
+user-select: none;
+}
+
+
+.layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.4);
+    z-index: 9;
+    display: none;
+}
+.layer.show {
+    display: block;
+}
+.pop-box{
+    height: 100%;
+    font-size: 0;
+    text-align: center;
+}
+.pop-box:before {
+    height: 100%;
+    content: "";
+    width: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.pop-main {
+    background: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    width: 450px;
+}
+.pop-head {
+    padding: 20px;
+    position: relative;
+}
+.pop-head h2{
+    font-size: 16px;
+    color: #555;
+}
+.pop-body {
+    padding: 20px 20px 40px;
+}
+.pop-btn {
+    width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border: 1px solid #e85454;
+    color: #e85454;
+}
+.pop-btn + .pop-btn {
+    margin-left: 20px;
+}
+.pop-btn:hover,
+.pop-btn-unchoose {
+    background: #e85454;
+    color: #fff;
+}
+.ico-close {
+    width: 22px;
+    height: 22px;
+    background: url(../img/close.png) no-repeat;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    transition:transform .8s;
+}
+.ico-close:hover {
+    transform:rotate(180deg);
+}
