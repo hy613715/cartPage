@@ -57,6 +57,7 @@ new Vue({
             this.layerShow = !this.layerShow;
         },
         getMsg: function(){
+            // todo
             this.addressList.push(this.addAddress);
             this.showPop();
             this.limitAddr = this.addressList.length;
