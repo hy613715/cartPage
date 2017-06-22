@@ -88,7 +88,7 @@ new Vue({
                 _this.addressList.push(_this.addAddress);
                 this.limitAddr = this.addressList.length;
                 this.getAddr();
-                
+
                 // 关闭弹窗
                 this.layerShow = !this.layerShow;
             });
