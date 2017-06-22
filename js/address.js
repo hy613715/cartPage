@@ -15,7 +15,7 @@ new Vue({
             }
         }
     },
-    
+
     mounted: function() {
         this.getAddr();
     },
@@ -64,16 +64,10 @@ new Vue({
         getMsg: function() {
             var _this = this;
 
-            this.$http({
-                url: '../data/addAddress.json',
-                method: 'POST',
-                data: {
-                    userName: '22',
-                    streetName: this.addAddress['streetName'],
-                    postCode: this.addAddress['postCode']
-                },
-                headers: {"X-Requested-With": "XMLHttpRequest"},
-                emulateJSON: true
+            this.$http.post('../data/addAddress.json', {
+                userName: '22',
+                streetName: this.addAddress['streetName'],
+                postCode: this.addAddress['postCode']
             }).then(function(res) {
 
                 // 将字符串解析为json对象
@@ -85,7 +79,7 @@ new Vue({
 
                 _this.addressList.push(_this.addAddress);
                 this.limitAddr = this.addressList.length;
-                this.getAddr();
+                // this.getAddr();
 
                 // 关闭弹窗
                 this.layerShow = !this.layerShow;
