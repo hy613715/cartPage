@@ -1,71 +1,94 @@
 new Vue({
-    el:'.container',
-    data:function() {
+    el: '.container',
+    data: function() {
         return {
             addressList: [],
             limitAddr: 2,
             curIndex: 0,
             sendWays: 1,
-            curAddr:'',
+            curAddr: '',
             layerShow: false,
             addAddress: {
-                'userName':'',
-                'streetName':'',
-                'postCode':''
+                'userName': '',
+                'streetName': '',
+                'postCode': ''
             }
         }
     },
     filters: {
 
     },
-    mounted: function(){
+    mounted: function() {
         this.getAddr();
     },
-    computed:{
-        addressLimit:function(){
+    computed: {
+        addressLimit: function() {
             return this.addressList.slice(0, this.limitAddr);
         }
     },
     methods: {
-        getAddr: function(){
+        getAddr: function() {
             var _this = this;
-            _this.$http.get('../data/address.json').then(function(res){
+            _this.$http.get('../data/address.json').then(function(res) {
                 this.addressList = res.body.result;
             })
         },
-        showMore: function(){
-            if(this.limitAddr==2){
+        showMore: function() {
+            if (this.limitAddr == 2) {
                 this.limitAddr = this.addressList.length;
-            }else{
-                this.limitAddr=2;
+            } else {
+                this.limitAddr = 2;
             }
         },
-        setDefault: function(addressId){
-            this.addressList.forEach(function(item,index){
-                if(item.addressId==addressId){
+        setDefault: function(addressId) {
+            this.addressList.forEach(function(item, index) {
+                if (item.addressId == addressId) {
                     item.isDefault = true;
-                }else{
+                } else {
                     item.isDefault = false;
                 }
             })
         },
-        moveAddr:function(item){
+        moveAddr: function(item) {
             var index = this.addressList.indexOf(item);
-            this.addressList.splice(index,1)
+            this.addressList.splice(index, 1)
         },
-        showPop:function(){
-            this.addAddress = {
-                'userName':'',
-                'streetName':'',
-                'postCode':''
+        showPop: function() {
+            var _this = this;
+            _this.addAddress = {
+                'userName': '',
+                'streetName': '',
+                'postCode': ''
             }
 
             this.layerShow = !this.layerShow;
         },
-        getMsg: function(){
-            this.addressList.push(this.addAddress);
-            this.showPop();
-            this.limitAddr = this.addressList.length;
+        getMsg: function() {
+            var _this = this;
+
+            this.$http({
+                url: '../data/addAddress.json',
+                method: 'POST',
+                data: {
+                    userName: this.addAddress['userName'],
+                    streetName: this.addAddress['streetName'],
+                    postCode: this.addAddress['postCode']
+                }
+            }).then(function(res) {
+
+                // 将字符串解析为json对象
+                var data = JSON.parse(res.data);
+                if(data.code != '0') {
+                    console.log('请求不成功');
+                    return;
+                }
+
+                _this.addressList.push(_this.addAddress);
+                this.limitAddr = this.addressList.length;
+
+                // 关闭弹窗
+                this.layerShow = !this.layerShow;
+            });
         }
     }
 });
