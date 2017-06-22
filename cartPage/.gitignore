@@ -1,0 +1,6 @@
+# qzz/fekit/grunt
+node_modules/
+
+# system ignore
+.DS_Store
+Thumbs.db
