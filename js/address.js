@@ -15,9 +15,7 @@ new Vue({
             }
         }
     },
-    filters: {
-
-    },
+    
     mounted: function() {
         this.getAddr();
     },
