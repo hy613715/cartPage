@@ -1,17 +1,17 @@
 new Vue({
-    el:".container",
+    el:'.container',
     data:function() {
-        return{
+        return {
             addressList: [],
             limitAddr: 2,
             curIndex: 0,
             sendWays: 1,
-            curAddr:"",
+            curAddr:'',
             layerShow: false,
             addAddress: {
-                "userName":'',
-                "streetName":'',
-                "postCode":''
+                'userName':'',
+                'streetName':'',
+                'postCode':''
             }
         }
     },
@@ -29,7 +29,7 @@ new Vue({
     methods: {
         getAddr: function(){
             var _this = this;
-            _this.$http.get("../data/address.json").then(function(res){
+            _this.$http.get('../data/address.json').then(function(res){
                 this.addressList = res.body.result;
             })
         },
@@ -54,13 +54,18 @@ new Vue({
             this.addressList.splice(index,1)
         },
         showPop:function(){
+            this.addAddress = {
+                'userName':'',
+                'streetName':'',
+                'postCode':''
+            }
+
             this.layerShow = !this.layerShow;
         },
         getMsg: function(){
-            // todo
             this.addressList.push(this.addAddress);
             this.showPop();
             this.limitAddr = this.addressList.length;
         }
     }
-})
+});
