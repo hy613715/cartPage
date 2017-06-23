@@ -63,12 +63,16 @@ new Vue({
                     isDefault:false,
                     addressId: 100000+this.addressList.length+1
                 });
-                console.log(this.addressList.Object.addressId)
+
+                this.addressList.forEach(function(item) {
+                    console.log(item.addressId);
+                })
                 this.inputName = "";
                 this.inuptAddress = "";
                 this.inputPostNum = "";
             }else{
                 alert("请输入完整信息");
+                return false;
             }
 
             this.showPop();
