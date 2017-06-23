@@ -63,7 +63,6 @@ new Vue({
                     isDefault:false,
                     addressId: 100000+this.addressList.length+1
                 });
-                console.log(this.addressList.Object.addressId)
                 this.inputName = "";
                 this.inuptAddress = "";
                 this.inputPostNum = "";
