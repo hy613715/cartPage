@@ -8,9 +8,9 @@ new Vue({
             sendWays: 1,
             curAddr:"",
             layerShow: false,
-            inputName:"",
-            inuptAddress:"",
-            inputPostNum:""
+            userName:"",
+            streetName:"",
+            postCode:""
         }
     },
     filters: {
@@ -55,31 +55,40 @@ new Vue({
         },
         //修改地址
         editAddr:function(item){
+            var _this = this;
             // 因为关闭弹窗的时候需要清空input的值，所以this.showPop();要放在最前面执行
-            this.showPop();
+            _this.showPop(item);
             // 给input赋值，取当前点击的地址相应的值
-            this.inputName = item.userName;
-            this.inuptAddress = item.streetName;
-            this.inputPostNum = item.postCode;
-            console.log(item.addressId)
+            // this.inputName = item.userName;
+            // this.inuptAddress = item.streetName;
+            // this.inputPostNum = item.postCode;
+            // console.log(item.addressId)
         },
         moveAddr:function(item){
             var index = this.addressList.indexOf(item);
             this.addressList.splice(index,1)
         },
-        showPop:function(){
+        showPop:function(item) {
             this.layerShow = !this.layerShow;
             //点击关闭图标或者取消，input的值清空
-            this.inputName = "";
-            this.inuptAddress = "";
-            this.inputPostNum = "";
+            if(item) {
+                this.userName = item.userName;
+                this.streetName = item.streetName;
+                this.postCode = item.postCode;
+                this.isDefault = item.isDefault;
+                this.addressId = item.addressId;
+            } else {
+                this.userName = "";
+                this.streetName = "";
+                this.postCode = "";
+            }
         },
-        getMsg: function(){
-            if(this.inputName!="" && this.inuptAddress != "" &&this.inputPostNum!=""){
+        getMsg: function(item){
+            if(this.userName!="" && this.inuptAddress != "" &&this.postCode!=""){
                 this.addressList.push({
-                    userName:this.inputName,
-                    streetName:this.inuptAddress,
-                    postCode:this.inputPostNum,
+                    userName:this.userName,
+                    streetName:this.streetName,
+                    postCode:this.postCode,
                     isDefault:false,
                     addressId: 100000+this.addressList.length+1
                 });
@@ -87,9 +96,16 @@ new Vue({
                 // this.addressList.forEach(function(item) {
                 //     console.log(item.addressId);
                 // });
-                this.inputName = "";
-                this.inuptAddress = "";
-                this.inputPostNum = "";
+
+                var data = {
+                    userName: this.userName,
+                    streetName: this.streetName,
+                    postCode: this.postCode,
+                    isDefault: false
+                }
+                this.$http.post("../data/updateAddress.json",data).then(function(res){
+                    console.log(1);
+                });
             }else{
                 alert("请输入完整信息");
                 return false;
