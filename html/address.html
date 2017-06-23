@@ -16,7 +16,7 @@
                     <p class="user-address">地址：{{item.streetName}}</p>
                     <p class="user-postNum">邮编：{{item.postCode}}</p>
                     <p class="user-default" v-if="item.isDefault">默认地址</p>
-                    <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item.addressId)">设为默认地址</p>
+                    <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item)">设为默认地址</p>
                     <i class="ico ico-edit"></i>
                     <i class="ico ico-del" @click="moveAddr(item)"></i>
                 </li>
