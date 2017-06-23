@@ -61,7 +61,6 @@ new Vue({
             this.inputName = item.userName;
             this.inuptAddress = item.streetName;
             this.inputPostNum = item.postCode;
-            console.log(item.addressId)
         },
         moveAddr:function(item){
             var index = this.addressList.indexOf(item);
@@ -87,9 +86,6 @@ new Vue({
                 // this.addressList.forEach(function(item) {
                 //     console.log(item.addressId);
                 // });
-                this.inputName = "";
-                this.inuptAddress = "";
-                this.inputPostNum = "";
             }else{
                 alert("请输入完整信息");
                 return false;
