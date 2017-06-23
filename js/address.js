@@ -100,7 +100,7 @@ new Vue({
         },
 
         getMsg: function(){
-            
+
             if(this.inputName == '' || this.inuptAddress == '' || this.inputPostNum == '') {
                 alert("请输入完整信息");
                 return false;
