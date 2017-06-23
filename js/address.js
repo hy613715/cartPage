@@ -11,7 +11,12 @@ new Vue({
             id: '',
             inputName:"",
             inuptAddress:"",
-            inputPostNum:""
+            inputPostNum:"",
+            addAddress: {
+                'userName': '',
+                'streetName': '',
+                'postCode': ''
+            }
         }
     },
     filters: {
@@ -26,7 +31,16 @@ new Vue({
         }
     },
     methods: {
-
+        clearData: function() {
+            this.inputName = "";
+            this.inuptAddress = "";
+            this.inputPostNum = "";
+            this.addAddress =  {
+                'userName': '',
+                'streetName': '',
+                'postCode': ''
+            };
+        },
         getAddr: function(){
             var _this = this;
             _this.$http.get("../data/address.json").then(function(res){
@@ -86,7 +100,7 @@ new Vue({
         },
 
         getMsg: function(){
-            debugger;
+            
             if(this.inputName == '' || this.inuptAddress == '' || this.inputPostNum == '') {
                 alert("请输入完整信息");
                 return false;
@@ -121,13 +135,25 @@ new Vue({
                     return;
                 }
 
+                // 下面是添加新地址时用到的，其实平时不需要，再向后端请求就好了，这里为了方便看是否添加上了就赋值了一下
+                this.addAddress['userName'] = this.inputName;
+                this.addAddress['streetName'] = this.inuptAddress;
+                this.addAddress['postCode'] = this.inputPostNum;
+
                 this.addressList.push(this.addAddress);
+                // end
+
                 this.limitAddr = this.addressList.length;
+
+                // 不管是新增还是修改，处理完后向后端请求一下，页面的数据就会变化
                 // this.getAddr();
 
                 // 关闭弹窗
                 this.layerShow = !this.layerShow;
+
+                // 清除数据
+                this.clearData();
             });
         }
     }
-})
+});
