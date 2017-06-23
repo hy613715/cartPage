@@ -66,7 +66,7 @@ new Vue({
 
                 this.addressList.forEach(function(item) {
                     console.log(item.addressId);
-                })
+                });
                 this.inputName = "";
                 this.inuptAddress = "";
                 this.inputPostNum = "";

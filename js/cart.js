@@ -21,7 +21,7 @@ var vm = new Vue({
     mounted: function() {
         this.cartView();
     },
-    
+
     // 方法
     methods: {
         cartView: function() {
