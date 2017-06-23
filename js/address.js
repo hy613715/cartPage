@@ -74,30 +74,28 @@ new Vue({
             this.inputPostNum = "";
         },
         getMsg: function(){
-            getMsg: function() {
-                var _this = this;
+            var _this = this;
 
-                this.$http.post('../data/addAddress.json', {
-                    userName: '22',
-                    streetName: this.addAddress['streetName'],
-                    postCode: this.addAddress['postCode']
-                }).then(function(res) {
+            this.$http.post('../data/addAddress.json', {
+                userName: '22',
+                streetName: this.addAddress['streetName'],
+                postCode: this.addAddress['postCode']
+            }).then(function(res) {
 
-                    // 将字符串解析为json对象
-                    var data = JSON.parse(res.data);
-                    if(data.code != '0') {
-                        console.log('请求不成功');
-                        return;
-                    }
+                // 将字符串解析为json对象
+                var data = JSON.parse(res.data);
+                if(data.code != '0') {
+                    console.log('请求不成功');
+                    return;
+                }
 
-                    _this.addressList.push(_this.addAddress);
-                    this.limitAddr = this.addressList.length;
-                    // this.getAddr();
+                _this.addressList.push(_this.addAddress);
+                this.limitAddr = this.addressList.length;
+                // this.getAddr();
 
-                    // 关闭弹窗
-                    this.layerShow = !this.layerShow;
-                });
-            }
+                // 关闭弹窗
+                this.layerShow = !this.layerShow;
+            });
         }
     }
 })
