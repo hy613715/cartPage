@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>地址选择</title>
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/address.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/address.css">
 </head>
 <body>
     <div class="container">
@@ -16,13 +16,13 @@
                     <p class="user-address">地址：{{item.streetName}}</p>
                     <p class="user-postNum">邮编：{{item.postCode}}</p>
                     <p class="user-default" v-if="item.isDefault">默认地址</p>
-                    <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item)">设为默认地址</p>
-                    <i class="ico ico-edit"></i>
+                    <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item.addressId)">设为默认地址</p>
+                    <i class="ico ico-edit" @click="editAddr"></i>
                     <i class="ico ico-del" @click="moveAddr(item)"></i>
                 </li>
                 <li @click="showPop">
                     <div class="add-wrap">
-                        <img src="../img/plus.png">
+                        <img src="img/plus.png">
                         <p class="add-address">添加新地址</p>
                     </div>
                 </li>
@@ -48,15 +48,15 @@
                     <ul class="pop-input">
                         <li>
                             <label for="" class="label">姓名：</label>
-                            <input type="text" placeholder="请输入姓名" v-model.trim="inputName">
+                            <input type="text" placeholder="请输入姓名" v-model="addAddress.userName">
                         </li>
                         <li>
                             <label for="" class="label">地址：</label>
-                            <input type="text" placeholder="请输入地址" v-model.trim="inuptAddress">
+                            <input type="text" placeholder="请输入地址" v-model="addAddress.streetName">
                         </li>
                         <li>
                             <label for="" class="label">邮编：</label>
-                            <input type="text" placeholder="请输入邮编" v-model.trim="inputPostNum">
+                            <input type="text" placeholder="请输入邮编" v-model="addAddress.postCode">
                         </li>
                     </ul>
                 </div>
@@ -69,6 +69,6 @@
     </div>
     <script src="https://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-    <script src="../js/address.js"></script>
+    <script src="js/address.js"></script>
 </body>
 </html>

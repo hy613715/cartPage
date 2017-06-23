@@ -38,21 +38,32 @@ new Vue({
                 this.limitAddr=2;
             }
         },
-        setDefault: function(addressId){
-            this.addressList.forEach(function(item,index){
-                if(item.addressId==addressId){
-                    //发送请求到后端设为默认
-                    var _this = this;
-                    _this.$http.post("../data/updateAddress.json",{
+        // 设置默认地址
+        setDefault: function(item){
+            // this.addressList.forEach(function(item,index){
+            //     if(item.addressId==addressId){
+            //
+            //     }else{
+            //         item.isDefault = false;
+            //     }
+            // });
 
-                    }).then(function(){
+            this.$http.post("../data/setDefaultAddress.json", {addressId: item.addressId}).then(function(res){
 
-                    })
-                    item.isDefault = true;
-                }else{
+                // 这里感觉写的不太合适，不过能实现功能
+                this.addressList.forEach(function(item){
                     item.isDefault = false;
-                }
-            })
+                });
+
+                // 此处应该是有弹窗，提示成功，先用log代替吧,不知道为啥json是个字符串，只能先转成对象去获取
+                console.log(JSON.parse(res.data).msg);
+                item.isDefault = true;
+            });
+
+        },
+        //修改地址
+        editAddr:function(){
+            alert("sdfadf")
         },
         moveAddr:function(item){
             var index = this.addressList.indexOf(item);
