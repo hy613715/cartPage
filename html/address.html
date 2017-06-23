@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../style/address.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="app">
         <h1 class="address-head"><span>配送地址</span></h1>
         <div class="address-body">
             <ul class="address-cards clearfix">
@@ -20,7 +20,7 @@
                     <i class="ico ico-edit" @click="editAddr(item)"></i>
                     <i class="ico ico-del" @click="moveAddr(item)"></i>
                 </li>
-                <li @click="showPop">
+                <li @click="showPop(false)">
                     <div class="add-wrap">
                         <img src="../img/plus.png">
                         <p class="add-address">添加新地址</p>
@@ -42,26 +42,26 @@
         </div>
         <div class="pop" v-bind:class="{'open':layerShow}">
             <div class="pop-main">
-                <i class="ico-close" @click="showPop"></i>
+                <i class="ico-close" @click="showPop(false)"></i>
                 <h3>添加地址</h3>
                 <div class="pop-body">
-                    <ul class="pop-input">
+                    <ul class="pop-input" v-bind:id="id">
                         <li>
                             <label for="" class="label">姓名：</label>
-                            <input type="text" placeholder="请输入姓名" v-model.trim="userName">
+                            <input type="text" placeholder="请输入姓名" v-model.trim="inputName">
                         </li>
                         <li>
                             <label for="" class="label">地址：</label>
-                            <input type="text" placeholder="请输入地址" v-model.trim="streetName">
+                            <input type="text" placeholder="请输入地址" v-model.trim="inuptAddress">
                         </li>
                         <li>
                             <label for="" class="label">邮编：</label>
-                            <input type="text" placeholder="请输入邮编" v-model.trim="postCode">
+                            <input type="text" placeholder="请输入邮编" v-model.trim="inputPostNum">
                         </li>
                     </ul>
                 </div>
                 <div class="pop-btns">
-                    <a href="javascript:;" class="btn" @click="getMsg()">确定</a>
+                    <a href="javascript:;" class="btn" @click="getMsg">确定</a>
                     <a href="javascript:;" class="btn" @click="showPop">取消</a>
                 </div>
             </div>

@@ -1,22 +1,23 @@
 new Vue({
-    el:".container",
+    el:"#app",
     data:function() {
-        return{
+        return {
             addressList: [],
             limitAddr: 2,
             curIndex: 0,
             sendWays: 1,
             curAddr:"",
             layerShow: false,
-            userName:"",
-            streetName:"",
-            postCode:""
+            id: '',
+            inputName:"",
+            inuptAddress:"",
+            inputPostNum:""
         }
     },
     filters: {
 
     },
-    mounted: function(){
+    mounted: function() {
         this.getAddr();
     },
     computed:{
@@ -25,6 +26,7 @@ new Vue({
         }
     },
     methods: {
+
         getAddr: function(){
             var _this = this;
             _this.$http.get("../data/address.json").then(function(res){
@@ -58,61 +60,74 @@ new Vue({
             var _this = this;
             // 因为关闭弹窗的时候需要清空input的值，所以this.showPop();要放在最前面执行
             _this.showPop(item);
-            // 给input赋值，取当前点击的地址相应的值
-            // this.inputName = item.userName;
-            // this.inuptAddress = item.streetName;
-            // this.inputPostNum = item.postCode;
-            // console.log(item.addressId)
         },
         moveAddr:function(item){
             var index = this.addressList.indexOf(item);
             this.addressList.splice(index,1)
         },
+
+        // 显示弹窗
         showPop:function(item) {
+
             this.layerShow = !this.layerShow;
             //点击关闭图标或者取消，input的值清空
+
+            this.inputName = "";
+            this.inuptAddress = "";
+            this.inputPostNum = "";
+
+            // 当有参数传过来时，说明是修改，直接赋值到输入框
             if(item) {
-                this.userName = item.userName;
-                this.streetName = item.streetName;
-                this.postCode = item.postCode;
-                this.isDefault = item.isDefault;
-                this.addressId = item.addressId;
-            } else {
-                this.userName = "";
-                this.streetName = "";
-                this.postCode = "";
+                this.inputName = item.userName;
+                this.inuptAddress = item.streetName;
+                this.inputPostNum = item.postCode;
+                this.id = item.addressId;
             }
         },
-        getMsg: function(item){
-            if(this.userName!="" && this.inuptAddress != "" &&this.postCode!=""){
-                this.addressList.push({
-                    userName:this.userName,
-                    streetName:this.streetName,
-                    postCode:this.postCode,
-                    isDefault:false,
-                    addressId: 100000+this.addressList.length+1
-                });
 
-                // this.addressList.forEach(function(item) {
-                //     console.log(item.addressId);
-                // });
-
-                var data = {
-                    userName: this.userName,
-                    streetName: this.streetName,
-                    postCode: this.postCode,
-                    isDefault: false
-                }
-                this.$http.post("../data/updateAddress.json",data).then(function(res){
-                    console.log(1);
-                });
-            }else{
+        getMsg: function(){
+            debugger;
+            if(this.inputName == '' || this.inuptAddress == '' || this.inputPostNum == '') {
                 alert("请输入完整信息");
                 return false;
             }
 
-            this.showPop();
-            this.limitAddr = this.addressList.length;
+            // 给后端发的请求地址
+            var postUrl = '../data/addAddress.json';
+
+            // 给后端传的参数，当有参数时是修改，必须传id,to：hy,参数是和后端定的，需要让你传什么就传什么，不是想当然的传
+            var data = {
+                userName: this.inputName,
+                streetName: this.inuptAddress,
+                postCode: this.inputPostNum
+            }
+
+            if(this.id) {
+                data = {
+                    userName: this.inputName,
+                    streetName: this.inuptAddress,
+                    postCode: this.inputPostNum,
+                    addressId: this.id
+                }
+                postUrl = '../data/updateAddress.json';
+            }
+
+            this.$http.post(postUrl, data).then(function(res) {
+
+                // 将字符串解析为json对象
+                var data = JSON.parse(res.data);
+                if(data.code != '0') {
+                    console.log('请求不成功');
+                    return;
+                }
+
+                this.addressList.push(this.addAddress);
+                this.limitAddr = this.addressList.length;
+                // this.getAddr();
+
+                // 关闭弹窗
+                this.layerShow = !this.layerShow;
+            });
         }
     }
 })
