@@ -40,14 +40,6 @@ new Vue({
         },
         // 设置默认地址
         setDefault: function(item){
-            // this.addressList.forEach(function(item,index){
-            //     if(item.addressId==addressId){
-            //
-            //     }else{
-            //         item.isDefault = false;
-            //     }
-            // });
-
             this.$http.post("../data/setDefaultAddress.json", {addressId: item.addressId}).then(function(res){
 
                 // 这里感觉写的不太合适，不过能实现功能
@@ -62,8 +54,14 @@ new Vue({
 
         },
         //修改地址
-        editAddr:function(){
-            alert("sdfadf")
+        editAddr:function(item){
+            // 因为关闭弹窗的时候需要清空input的值，所以this.showPop();要放在最前面执行
+            this.showPop();
+            // 给input赋值，取当前点击的地址相应的值
+            this.inputName = item.userName;
+            this.inuptAddress = item.streetName;
+            this.inputPostNum = item.postCode;
+            console.log(item.addressId)
         },
         moveAddr:function(item){
             var index = this.addressList.indexOf(item);
@@ -71,6 +69,10 @@ new Vue({
         },
         showPop:function(){
             this.layerShow = !this.layerShow;
+            //点击关闭图标或者取消，input的值清空
+            this.inputName = "";
+            this.inuptAddress = "";
+            this.inputPostNum = "";
         },
         getMsg: function(){
             if(this.inputName!="" && this.inuptAddress != "" &&this.inputPostNum!=""){
@@ -82,9 +84,9 @@ new Vue({
                     addressId: 100000+this.addressList.length+1
                 });
 
-                this.addressList.forEach(function(item) {
-                    console.log(item.addressId);
-                });
+                // this.addressList.forEach(function(item) {
+                //     console.log(item.addressId);
+                // });
                 this.inputName = "";
                 this.inuptAddress = "";
                 this.inputPostNum = "";

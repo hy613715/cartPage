@@ -17,13 +17,13 @@
                     <p class="user-postNum">邮编：{{item.postCode}}</p>
                     <p class="user-default" v-if="item.isDefault">默认地址</p>
                     <p class="user-set-default" v-if="!item.isDefault" @click="setDefault(item.addressId)">设为默认地址</p>
-                    <i class="ico ico-edit" @click="editAddr"></i>
+                    <i class="ico ico-edit" @click="editAddr()"></i>
                     <i class="ico ico-del" @click="moveAddr(item)"></i>
                 </li>
                 <li @click="showPop">
                     <div class="add-wrap">
                         <img src="img/plus.png">
-                        <p class="add-address">添加新地址</p>
+                        <p class="add-address">添加新地址1</p>
                     </div>
                 </li>
             </ul>
