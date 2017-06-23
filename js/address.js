@@ -8,11 +8,9 @@ new Vue({
             sendWays: 1,
             curAddr:"",
             layerShow: false,
-            addAddress: {
-                "userName":'',
-                "streetName":'',
-                "postCode":''
-            }
+            inputName:"",
+            inuptAddress:"",
+            inputPostNum:""
         }
     },
     filters: {
@@ -57,7 +55,22 @@ new Vue({
             this.layerShow = !this.layerShow;
         },
         getMsg: function(){
-            this.addressList.push(this.addAddress);
+            if(this.inputName!="" && this.inuptAddress != "" &&this.inputPostNum!=""){
+                this.addressList.push({
+                    userName:this.inputName,
+                    streetName:this.inuptAddress,
+                    postCode:this.inputPostNum,
+                    isDefault:false,
+                    addressId: 100000+this.addressList.length+1
+                });
+                console.log(this.addressList.Object.addressId)
+                this.inputName = "";
+                this.inuptAddress = "";
+                this.inputPostNum = "";
+            }else{
+                alert("请输入完整信息");
+            }
+
             this.showPop();
             this.limitAddr = this.addressList.length;
         }
