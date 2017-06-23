@@ -16,7 +16,7 @@ new Vue({
     filters: {
 
     },
-    mounted: function(){
+    mounted: function() {
         this.getAddr();
     },
     computed:{
@@ -74,25 +74,30 @@ new Vue({
             this.inputPostNum = "";
         },
         getMsg: function(){
-            if(this.inputName!="" && this.inuptAddress != "" &&this.inputPostNum!=""){
-                this.addressList.push({
-                    userName:this.inputName,
-                    streetName:this.inuptAddress,
-                    postCode:this.inputPostNum,
-                    isDefault:false,
-                    addressId: 100000+this.addressList.length+1
+            getMsg: function() {
+                var _this = this;
+
+                this.$http.post('../data/addAddress.json', {
+                    userName: '22',
+                    streetName: this.addAddress['streetName'],
+                    postCode: this.addAddress['postCode']
+                }).then(function(res) {
+
+                    // 将字符串解析为json对象
+                    var data = JSON.parse(res.data);
+                    if(data.code != '0') {
+                        console.log('请求不成功');
+                        return;
+                    }
+
+                    _this.addressList.push(_this.addAddress);
+                    this.limitAddr = this.addressList.length;
+                    // this.getAddr();
+
+                    // 关闭弹窗
+                    this.layerShow = !this.layerShow;
                 });
-
-                // this.addressList.forEach(function(item) {
-                //     console.log(item.addressId);
-                // });
-            }else{
-                alert("请输入完整信息");
-                return false;
             }
-
-            this.showPop();
-            this.limitAddr = this.addressList.length;
         }
     }
 })
