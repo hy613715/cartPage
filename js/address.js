@@ -41,6 +41,13 @@ new Vue({
         setDefault: function(addressId){
             this.addressList.forEach(function(item,index){
                 if(item.addressId==addressId){
+                    //发送请求到后端设为默认
+                    var _this = this;
+                    _this.$http.post("../data/updateAddress.json",{
+
+                    }).then(function(){
+
+                    })
                     item.isDefault = true;
                 }else{
                     item.isDefault = false;
