@@ -76,8 +76,12 @@ new Vue({
             _this.showPop(item);
         },
         moveAddr:function(item){
-            var index = this.addressList.indexOf(item);
-            this.addressList.splice(index,1)
+            this.$http.post("../data/delAddress.json",{addressId: item.addressId}).then(function(res){
+                var index = this.addressList.indexOf(item);
+                this.addressList.splice(index,1);
+                console.log(typeof JSON.parse(res.data));
+                alert(JSON.parse(res.data).msg)
+            })
         },
 
         // 显示弹窗
