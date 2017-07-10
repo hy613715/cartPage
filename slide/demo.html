@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>选项卡</title>
+    <style>
+        *{padding: 0;margin: 0;list-style: none;}
+        .container {
+            border: 1px solid #555;
+            width: 960px;
+            margin: 20px auto;
+            height: 400px;
+            font-family: "Microsoft Yahei";
+        }
+        .wrap {
+            width: 600px;
+            margin: 20px auto;
+            font-size: 0;
+        }
+        .content {
+            border: 1px solid #000;
+            font-size: 14px;
+            padding: 10px 20px;
+            margin-top: -1px;
+            min-height: 100px;
+        }
+        .tab {
+            display: inline-block;
+        }
+        .tab li {
+            float: left;
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+        .tab li.cur {
+            border-bottom: 1px solid #fff;
+        }
+        .tab li + li {
+            margin-left: -1px;
+        }
+        .clearfix:after {
+            content:".";
+            height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="wrap">
+            <ul class="tab clearfix">
+                <li v-for="item in newsList" v-bind:class="{'cur':current}" @click="tabChange(item)">{{item.title}}</li>
+            </ul>
+            <div class="content" v-for="item in newsList">{{item.detail}}</div>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: function(){
+                return {
+                    newsList:[],
+                    current: false
+                }
+            },
+            mounted: function(){
+                this.getData();
+            },
+            methods: {
+                getData:function(){
+                    this.$http.get("json.txt").then(function(res){
+                        this.newsList = res.body.data;
+                    })
+                },
+                tabChange: function(item) {
+                    console.log(item)
+                    if(item.id){
+
+                    }
+                    _this.current = true;
+                    _this.newsList.forEach(function(item,index){
+
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
